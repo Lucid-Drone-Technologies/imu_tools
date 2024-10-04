@@ -5,7 +5,7 @@ import launch.substitutions
 import launch_ros.actions
 from ament_index_python.packages import get_package_share_directory
 
-
+# change remapping to match your imu topic
 def generate_launch_description():
 
     config_dir = os.path.join(get_package_share_directory('imu_filter_madgwick'), 'config')
@@ -17,6 +17,9 @@ def generate_launch_description():
                 executable='imu_filter_madgwick_node',
                 name='imu_filter',
                 output='screen',
+                remappings=[
+                    ('imu/data_raw', '/d455/d455/imu'),
+                ],
                 parameters=[os.path.join(config_dir, 'imu_filter.yaml')],
             )
         ]
